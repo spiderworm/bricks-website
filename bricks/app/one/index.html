@@ -5,13 +5,25 @@
 	<h1>@brick.appName</h1>
 	<p>I am a test brick.</p>
 	<p>
-		<button type="button" name="fullscreen-button">toggle fullscreen</button>
+		<button type="button" name="toggle-fullscreen">toggle fullscreen</button>
+	</p>
+	<p>
+		<input type="text" name="update-appName" value="@brick.appName" placeholder="type in a name">
 	</p>
 	<script>
 		var fullscreen = false;
-		$('[name="fullscreen-button"]').click(function() {
+		$('[name="toggle-fullscreen"]').click(function() {
 			fullscreen = !fullscreen;
 			brick.fullscreen(fullscreen);
+		});
+
+		$('[name="update-appName"]').keypress(function() {
+			var input = this;
+			setTimeout(function() {
+				brick.setInfo({
+					name: input.value
+				});
+			},0);
 		});
 	</script>
 </article>

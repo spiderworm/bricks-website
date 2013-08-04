@@ -8,8 +8,7 @@
 	z-index: 1;
 }
 
-.brick > header,
-.brick > h1 {
+.brick > header {
 	background-color: rgba(0,0,0,.6);
 	border-radius: .2cm .2cm 0 0;
 	color: white;
@@ -21,6 +20,12 @@
 	font-weight: normal;
 
 	height: .5cm;
+}
+
+.brick > header > h1 {
+	margin: 0;
+	font-size: inherit;
+	font-weight: inherit;
 }
 
 .brick > .brick-contents {

@@ -23,8 +23,9 @@ define(
 			return this._$contents;
 		}
 
-		Widget.prototype.addSubWidget = function(widget) {
-			this._$contents.append(widget.get$());
+		Widget.prototype.addSubWidget = function(widget,addToDOM) {
+			if(addToDOM !== false)
+				this._$contents.append(widget.get$());
 		}
 
 		return Widget;
