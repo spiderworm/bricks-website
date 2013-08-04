@@ -1,15 +1,19 @@
 define(
 	[
-		'jquery'
+		'jquery',
+		'EventModel'
 	],
 	function(
-		$
+		$,
+		EventModel
 	) {
 
 		function Widget($elem,$contents) {
+			EventModel.apply(this);
 			this._$ = $elem;
 			this._$contents = $contents || $elem;
 		}
+		Widget.prototype = new EventModel();
 
 		Widget.prototype.get$ = function() {
 			return this._$;

@@ -1,8 +1,17 @@
-@brick.name = Test Brick One
-@brick.appName = @brick.name
+@brick.appName = Test Brick One
 @brick.developer = David Millet
 
 <article>
-	<h1>@brick.name</h1>
+	<h1>@brick.appName</h1>
 	<p>I am a test brick.</p>
-</article> 
+	<p>
+		<button type="button" name="fullscreen-button">toggle fullscreen</button>
+	</p>
+	<script>
+		var fullscreen = false;
+		$('[name="fullscreen-button"]').click(function() {
+			fullscreen = !fullscreen;
+			brick.fullscreen(fullscreen);
+		});
+	</script>
+</article>

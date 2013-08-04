@@ -18,14 +18,14 @@
 				'userManager',
 				'userBrickManager',
 				'ui/UserBricksWidget',
-				'Brick'
+				'UserBrick'
 			],
 			function(
 				$,
 				userManager,
 				userBrickManager,
 				UserBricksWidget,
-				Brick
+				UserBrick
 			) {
 
 				var user = userManager.getCurrentUser();
@@ -37,15 +37,15 @@
 				var brickArray = [];
 
 				brickArray.push(
-					new Brick("test one","@site.root/bricks/one")
+					new UserBrick(user,"test one","@site.root/bricks/one")
 				);
 
 				brickArray.push(
-					new Brick("Regex Visualizer","http://www.regexplained.co.uk/")
+					new UserBrick(user,"Regex Visualizer","http://www.regexplained.co.uk/")
 				);
 
 				brickArray.push(
-					new Brick("Calculator","@site.root/bricks/calculator")
+					new UserBrick(user,"Calculator","@site.root/bricks/calculator")
 				);
 
 				userBricks.add(brickArray);
