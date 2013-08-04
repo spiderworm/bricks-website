@@ -1,0 +1,40 @@
+@import url('brick.css');
+@import url('brick-search-app.css');
+
+body {
+	background-color: rgb(100,100,100);
+	color: black;
+
+	margin: 0;
+}
+
+body > header,
+body > nav,
+body > main,
+body > footer {
+	padding-left: .5cm;
+	padding-right: .5cm;
+}
+
+body > header {
+	background-color: rgb(200,100,100);
+	color: black;
+
+	padding-top: .5cm;
+	padding-bottom: .5cm;
+}
+
+body > header .site-logo,
+body > header .site-slogan {
+	display: inline-block;
+	margin: 0;
+	vertical-align: baseline;
+}
+
+body > header .site-logo {
+	margin-right: .5cm;
+}
+
+body > main {
+	padding-top: .5cm;
+}

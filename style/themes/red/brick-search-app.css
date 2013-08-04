@@ -1,0 +1,16 @@
+.brick-search-app {
+	background-color: #FEFFDA;
+	color: #BB2424;
+	padding: .25cm .4cm;
+	border-radius: .25cm;
+	margin: .25cm 0;
+}
+
+.brick-search-app > h1 {
+	margin: 0 .5cm 0 0;
+}
+
+.brick-search-app > * {
+	display: inline-block;
+	margin-right: .5cm;
+}
