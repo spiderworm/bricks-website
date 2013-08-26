@@ -8,7 +8,12 @@ define(
 
 		BrickMessage.TYPES = {
 			SET_INFO: 'set-info',
-			FULLSCREEN: 'fullscreen'
+			SET_SIZE: 'set-size'
+		};
+
+		BrickMessage.VALUES = {
+			FULLSCREEN: 'fullscreen',
+			DEFAULT_SIZE: 'default-size'
 		};
 
 		BrickMessage.INFO_FIELDS = {

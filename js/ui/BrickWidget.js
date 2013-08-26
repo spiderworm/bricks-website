@@ -32,26 +32,48 @@ define(
 				self._update();
 			});
 
-			var iframe = new BrickIframe(brick);
-			iframe.subscribeToMessages(function(messages) {
+			this._iframe = new BrickIframe(brick);
+			this._iframe.subscribeToMessages(function(messages) {
 				messages.each(function() {
-					if(this.type === BrickMessage.TYPES.FULLSCREEN) {
-						self.fullscreen(this.value);
+					if(this.type === BrickMessage.TYPES.SET_SIZE) {
+						if(this.value === BrickMessage.VALUES.FULLSCREEN)
+							self.fullscreen();
+						else if(this.value === BrickMessage.VALUES.DEFAULT_SIZE)
+							self.defaultSize();
+						else
+							self.setSize(this.value.width,this.value.height);
 					}
 				});
 			});
-			this.addSubWidget(iframe);
+			this.addSubWidget(this._iframe);
 
 		}
 		BrickWidget.prototype = new Widget();
-		BrickWidget.prototype.fullscreen = function(bool) {
-			if(this._fullscreen === true && bool === false) {
-				this._fullscreen = false;
-				this.get$().removeClass('fullscreen');
-			} else if(this._fullscreen === false && bool === true) {
+		BrickWidget.prototype.fullscreen = function() {
+			if(this._fullscreen === false) {
 				this._fullscreen = true;
 				this.get$().addClass('fullscreen');
+				this._sendSize();
 			}
+		}
+		BrickWidget.prototype.defaultSize = function() {
+			if(this._fullscreen) {
+				this._fullscreen = false;
+				this.get$().removeClass('fullscreen');
+				this._sendSize();
+			}
+		}
+		BrickWidget.prototype._sendSize = function() {
+			var result = {
+				fullscreen: this._fullscreen,
+				defaultSize: true
+			};
+			if(this._fullscreen)
+				result.defaultSize = false;
+
+			this._iframe.sendMessage(
+				new BrickMessage(BrickMessage.TYPES.SET_SIZE,result)
+			);
 		}
 		BrickWidget.prototype._update = function() {		
 		}

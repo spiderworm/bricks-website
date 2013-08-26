@@ -13,8 +13,11 @@
 	<script>
 		var fullscreen = false;
 		$('[name="toggle-fullscreen"]').click(function() {
-			fullscreen = !fullscreen;
-			brick.fullscreen(fullscreen);
+			if(fullscreen) {
+				brick.defaultSize();
+			} else {
+				brick.fullscreen();
+			}
 		});
 
 		$('[name="update-appName"]').keypress(function() {
@@ -24,6 +27,10 @@
 					name: input.value
 				});
 			},0);
+		});
+
+		brick.onSizeUpdate(function(size) {
+			fullscreen = size.fullscreen;
 		});
 	</script>
 </article>

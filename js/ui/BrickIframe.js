@@ -51,6 +51,9 @@ define(
 				null
 			);
 		}
+		BrickIframe.prototype.sendMessage = function(brickMessage){
+			this._$[0].contentWindow.postMessage(JSON.stringify(brickMessage),"*");
+		}
 		BrickIframe.prototype._handleRawMessage = function(rawText) {
 			var messages = new BrickMessages();
 			var rawMessages = [];
