@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Bricks</title>
+		<link rel="stylesheet" href="style/themes/red.css">
+		<script src="js/external/require.js"></script>
+		<script>
+			requirejs.config({
+				baseUrl: "js/",
+				paths: {
+					"jquery": "external/jquery-1.10.2",
+					"backbone": "external/backbone-1.1.2",
+					"underscore": "external/underscore-1.6.0",
+					"react": "external/react-0.10.0",
+					"JSXTransformer": "external/JSXTransformer-0.10.0",
+					"jsx": "external/require-jsx"
+				},
+				shim: {
+					"backbone": {
+						deps: ["underscore"],
+						exports: "Backbone"
+					},
+					"underscore": {
+						exports: "_"
+					},
+					"react": {
+						exports: "React"
+					},
+					"JSXTransformer": {
+						exports: "JSXTransformer"
+					}
+				}
+			});
+		</script>
+	</head>
+	<body>
+
+		<header>
+			<hgroup>
+				<h1 class="site-logo">Bricks</h1>
+				<h2 class="site-slogan">HTML5 apps and microapps</h2>
+			</hgroup>
+		</header>
+
+		<main></main>
+
+		<script>
+
+			require(
+				[
+					"react",
+					"jsx!ui/BricksUI"
+				],
+				function(
+					react,
+					BricksUI
+				) {
+
+					react.renderComponent(
+						BricksUI(),
+						document.querySelector('main')
+					);
+
+				}
+			);
+
+		</script>
+
+	</body>
+
+</html>

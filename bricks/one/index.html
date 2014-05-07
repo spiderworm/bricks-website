@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+	<title>Test Brick One by David Millet</title>
+	<script src="../shared/js/jquery-1.10.2.js"></script>
+	<script src="http://spiderworm.github.io/brick.js/src/brick.js"></script>
+	<script>
+		brick.setInfo({
+			name: 'Test Brick One',
+			developer: 'David Millet'
+		});
+	</script>
+
+</head>
+<body>
+
+	<main>
+
+		<article>
+			<h1>Test Brick One</h1>
+			<p>I am a test brick.</p>
+			<p>
+				<button type="button" name="toggle-fullscreen">toggle fullscreen</button>
+			</p>
+			<p>
+				<input type="text" name="update-appName" value="Test Brick One" placeholder="type in a name">
+			</p>
+			<script>
+				var fullscreen = false;
+				$('[name="toggle-fullscreen"]').click(function() {
+					if(fullscreen) {
+						brick.defaultSize();
+					} else {
+						brick.fullscreen();
+					}
+				});
+
+				$('[name="update-appName"]').keypress(function() {
+					var input = this;
+					setTimeout(function() {
+						brick.setInfo({
+							name: input.value
+						});
+					},0);
+				});
+
+				brick.onSizeUpdate(function(size) {
+					fullscreen = size.fullscreen;
+				});
+			</script>
+		</article>
+
+	</main>
+
+</body>
+</html>

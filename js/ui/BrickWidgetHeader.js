@@ -1,23 +1,36 @@
 define(
 	[
-		'ui/Widget',
+		'react'
 	],
 	function(
-		Widget
+		React
 	) {
 
-		function BrickWidgetHeader(brick) {
-			var $main = $('<header><h1></h1></header>');
-			Widget.apply(this,[$main]);
-
-			this._brick = brick;
-
-			brick.subscribe(function() {
-				$main.find('> h1').text(brick.getDisplayName());
-			});
-		}
-
-		BrickWidgetHeader.prototype = new Widget();
+		var BrickWidgetHeader = React.createClass({
+			getDefaultProps: function() {
+				var brick = this.props.brick;
+				if(brick) {
+					var widget = this;
+					brick.subscribe(
+						function() {
+							widget.forceUpdate();
+						}
+					);
+				}
+				return {
+					brick: brick
+				};
+			},
+			render: function() {
+				return (
+					<header>
+						<h1>
+							{this.props.brick.getDisplayName()}
+						</h1>
+					</header>
+				);
+			}
+		});
 
 		return BrickWidgetHeader;
 

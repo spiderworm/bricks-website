@@ -1,21 +1,63 @@
 define(
 	[
-		'ui/Widget',
-		'ui/BricksWidget'
+		"react",
+		"jsx!./UserBrickWidget",
+		"../userBrickManager",
+		"../UserBrick"
 	],
 	function(
-		Widget,
-		BricksWidget
+		React,
+		UserBrickWidget,
+		userBrickManager,
+		UserBrick
 	) {
 
-		function UserBricksWidget(userBricks) {
-			var $elem = $('<div class="user-bricks-widget"></div>');
-			Widget.apply(this,[$elem]);
+		var UserBricksWidget = React.createClass({
+			getDefaultProps: function() {
+				var user = this.props.user;
+				var userBricks;
+				if(user) {
+					userBricks = userBrickManager.getForUser(user);
 
-			this._bricksWidget = new BricksWidget(userBricks);
-			this.addSubWidget(this._bricksWidget);
-		}
-		UserBricksWidget.prototype = new Widget();
+					var brickArray = [];
+
+					brickArray.push(
+						new UserBrick(user,"test one","./bricks/one")
+					);
+
+					brickArray.push(
+						new UserBrick(user,"Regex Visualizer","http://www.regexplained.co.uk/")
+					);
+
+					brickArray.push(
+						new UserBrick(user,"Calculator","./bricks/calculator")
+					);
+
+					userBricks.add(brickArray);
+
+					var widget = this;
+					userBricks.subscribe(function() {
+						widget.forceUpdate();
+					});
+				}
+				return {
+					user: null,
+					userBricks: userBricks
+				};
+			},
+			render: function() {
+			
+				return (
+					<section className="user-bricks-widget">
+						<h1>Your Bricks</h1>
+						{this.props.userBricks.toArray().map(function(userBrick) {
+							return <UserBrickWidget userBrick={userBrick}></UserBrickWidget>;
+						})}
+					</section>
+				);
+
+			}
+		});
 
 		return UserBricksWidget;
 
